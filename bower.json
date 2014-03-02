@@ -1,0 +1,10 @@
+{
+    "name": "Aight",
+    "dependencies": {
+        "jquery": "~ 1.10.1"
+    },
+    "devDependencies": {
+        "jasmine-jquery": "~ 2.0.0",
+        "jasmine": "~ 2.0.0"
+    }
+}
