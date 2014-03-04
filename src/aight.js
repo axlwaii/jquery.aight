@@ -22,17 +22,6 @@
 
         that = this;
 
-        standardTemplate =  '<div id="aight-backdrop"></div>'+
-                            '<div id="aight-wrapper">'+
-                            '<div id="aight-container">' +
-                            '<a id="aight-next" href="#">></a>'+
-                            '<a id="aight-prev" href="#"><</a>'+
-                            '<a id="aight-close" href="#">x</a>'+
-                            '<img src="" alt=""/>' +
-                            '<p id="aight-description"></p>'+
-                            '</div>' +
-                            '</div>';
-
         config = $.extend({
             backdrop: 'aight-backdrop',
             closeButton: 'aight-close',
@@ -40,9 +29,21 @@
             imageDescription: 'aight-description',
             nextButton: 'aight-next',
             prevButton: 'aight-prev',
-            template: standardTemplate,
+            template: '',
             wrapper: 'aight-wrapper'
         }, options);
+
+        standardTemplate =  '<div id="' + config.backdrop + '"></div>'+
+                            '<div id="' + config.wrapper + '">'+
+                            '<div id="' + config.imageContainer + '">' +
+                            '<a id="' + config.nextButton + '" href="#">></a>'+
+                            '<a id="' + config.prevButton + '" href="#"><</a>'+
+                            '<a id="' + config.closeButton + '" href="#">x</a>'+
+                            '<img src="" alt=""/>' +
+                            '<p id="' + config.imageDescription + '"></p>'+
+                            '</div>' +
+                            '</div>';
+
 
         bindButtons = function() {
 
@@ -145,6 +146,7 @@
         };
 
         init = function() {
+            config.template = standardTemplate;
             $imageLinks = $((that.selector + ' a'));
             bindEvents();
         };
