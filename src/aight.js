@@ -8,6 +8,7 @@
             index,
             firstSetup,
             $imageLinks,
+            $imageDesc,
             $backdrop,
             $wrapper,
             $container,
@@ -28,6 +29,7 @@
                             '<a id="aight-prev" href="#"><</a>'+
                             '<a id="aight-close" href="#">x</a>'+
                             '<img src="" alt=""/>' +
+                            '<p id="aight-description"></p>'+
                             '</div>' +
                             '</div>';
 
@@ -35,6 +37,7 @@
             backdrop: 'aight-backdrop',
             closeButton: 'aight-close',
             imageContainer: 'aight-container',
+            imageDescription: 'aight-description',
             nextButton: 'aight-next',
             prevButton: 'aight-prev',
             template: standardTemplate,
@@ -47,14 +50,14 @@
                 e.preventDefault();
                 index = index > 0 ? index - 1 : $imageLinks.length - 1;
                 $currentImage = $($imageLinks[index]);
-                createImageContainer($currentImage.prop('href'));
+                createImageContainer();
             });
 
             $('#' + config.nextButton).unbind('click').click(function(e){
                 e.preventDefault();
                 index = index < $imageLinks.length-1 ? index + 1 : 0;
                 $currentImage = $($imageLinks[index]);
-                createImageContainer($currentImage.prop('href'));
+                createImageContainer();
 
             });
 
@@ -77,6 +80,7 @@
             $backdrop  = $('#' + config.backdrop);
             $wrapper   = $('#' + config.wrapper);
             $container = $('#' + config.imageContainer);
+            $imageDesc = $('#' + config.imageDescription);
 
         };
 
@@ -85,25 +89,38 @@
                 e.preventDefault();
                 $currentImage = $(this);
                 index = $imageLinks.index($currentImage);
-                createImageContainer($currentImage.prop('href'));
+                createImageContainer();
             });
 
         };
 
-        createImageContainer = function(img) {
+        createImageContainer = function() {
 
             var $containerImage = $('#' + config.imageContainer + ' img'),
-                firstRun = false;
+                firstRun = false,
+                imgUrl = $currentImage.prop('href'),
+                imgDescription = $currentImage.find('img').prop('alt');
+
 
             if($containerImage.length === 0){
                 firstSetup();
-                $('#' + config.imageContainer + ' img').prop('src', img);
+                $('#' + config.imageContainer + ' img').prop('src', imgUrl);
+                $('#' + config.imageContainer + ' img').prop('alt', imgDescription);
+                $('#aight-description').text(imgDescription);
                 $wrapper.fadeIn('slow');
                 $backdrop.fadeIn(200);
                 firstRun = true;
             } else {
-                $containerImage.prop('src', img);
+                $containerImage.prop('src', imgUrl);
+                $containerImage.prop('alt', imgDescription);
+                $('#aight-description').text(imgDescription);
                 $backdrop.fadeIn(200);
+            }
+
+            if(imgDescription === ''){
+                $imageDesc.hide();
+            } else {
+                $imageDesc.show();
             }
 
             $containerImage = $('#' + config.imageContainer + ' img');

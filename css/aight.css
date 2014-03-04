@@ -32,6 +32,10 @@
     max-height: 100%;
     max-width: 100%; }
 
+#aight-description {
+  margin: 10px 0 0 0;
+  padding: 0; }
+
 #aight-next, #aight-prev, #aight-close {
   position: absolute;
   font-family: 'Helvetica';
