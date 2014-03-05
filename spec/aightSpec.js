@@ -1,12 +1,14 @@
 describe('AIGHT - Image Galery plugin', function() {
 
+    'use strict';
+
     var fixture,
         loadFixtures,
         setupPage,
+        cleanUp,
         $container,
         $firstLink,
-        $secondLink,
-        closeLightBox;
+        $secondLink;
 
     loadFixtures = function() {
 
@@ -19,20 +21,20 @@ describe('AIGHT - Image Galery plugin', function() {
                         );
     };
 
-    closeLightBox = function() {
-        $('#aight-close').trigger('click');
-    };
-
     setupPage = function() {
-
-        loadFixtures();
-
-        $container = fixture.find('#aigth-container');
-        $firstLink = fixture.find('a')[0];
-        $secondLink = fixture.find('a')[1];
 
         $('#imageG').aight();
 
+        $firstLink = fixture.find('a')[0];
+        $secondLink = fixture.find('a')[1];
+
+        $container = fixture.find('#aigth-container');
+
+    };
+
+    cleanUp = function () {
+        $('#aight-backdrop').remove();
+        $('#aight-wrapper').remove();
     };
 
     describe('basic behaviour', function() {
@@ -46,6 +48,7 @@ describe('AIGHT - Image Galery plugin', function() {
     describe('on init', function(){
 
         beforeEach(function() {
+            loadFixtures();
             setupPage();
         });
 
@@ -58,13 +61,16 @@ describe('AIGHT - Image Galery plugin', function() {
     describe('on thumbnail click', function() {
 
         beforeEach(function() {
+            loadFixtures();
             setupPage();
-            jasmine.clock().install();
+            $($firstLink).trigger('click');
         });
 
-        it('should show lightbox on click', function(){
-            $($firstLink).trigger('click');
-            jasmine.clock().tick(1000);
+        afterEach(function(){
+            cleanUp();
+        });
+
+        it('should show lightbox', function(){
             $container = $('#aight-container');
             expect($container).toExist();
         });
@@ -75,15 +81,25 @@ describe('AIGHT - Image Galery plugin', function() {
             expect(imageUrl).toContain(imageLinkUrl);
         });
 
-        it('should close if x is clicked', function(){
-            $('#aight-close').click();
-            expect(parseInt($('#aight-wrapper').css('opacity'), 10)).toBe(0);
-        });
-
     });
 
-    describe('when lightbox is visible', function(){
-        pending;
+    describe('when close is clicked', function() {
+
+        beforeEach(function() {
+            loadFixtures();
+            setupPage();
+        });
+
+        afterEach(function(){
+            cleanUp();
+        });
+
+        it('should close if x is clicked', function(){
+            $($firstLink).trigger('click');
+            $('#aight-close').click();
+            expect($('#aight-backdrop')).toBeHidden();
+        });
+
     });
 
 });
