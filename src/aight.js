@@ -29,16 +29,17 @@
             imageContainer: 'aight-container',
             imageDescription: 'aight-description',
             nextButton: 'aight-next',
+            nextCharacter: '>',
+            prevCharacter: '<',
             prevButton: 'aight-prev',
-            template: '',
             wrapper: 'aight-wrapper'
         }, options);
 
         standardTemplate =  '<div id="' + config.backdrop + '"></div>'+
                             '<div id="' + config.wrapper + '">'+
                             '<div id="' + config.imageContainer + '">' +
-                            '<a id="' + config.nextButton + '" href="#">></a>'+
-                            '<a id="' + config.prevButton + '" href="#"><</a>'+
+                            '<a id="' + config.nextButton + '" href="#">'+ config.nextCharacter +'</a>'+
+                            '<a id="' + config.prevButton + '" href="#">' + config.prevCharacter +'</a>'+
                             '<a id="' + config.closeButton + '" href="#">x</a>'+
                             '<img src="" alt=""/>' +
                             '<p id="' + config.imageDescription + '"></p>'+
@@ -81,7 +82,7 @@
 
         firstSetup = function() {
 
-            $('body').append(config.template);
+            $('body').append(standardTemplate);
 
             $backdrop  = $('#' + config.backdrop);
             $wrapper   = $('#' + config.wrapper);
@@ -147,17 +148,16 @@
                     'margin-top': -($containerImage.height()/2)
                 },250);
 
-                if(firstRun){
-                    bindButtons();
-                }
-
             });
+
+            if(firstRun){
+                bindButtons();
+            }
 
             $wrapper.fadeIn();
         };
 
         init = function() {
-            config.template = standardTemplate;
             $imageLinks = $((that.selector + ' a'));
             bindEvents();
         };
