@@ -18,7 +18,8 @@
             createImageContainer,
             that,
             config,
-            standardTemplate;
+            standardTemplate,
+            singleImage = false;
 
         that = this;
 
@@ -47,20 +48,24 @@
 
         bindButtons = function() {
 
-            $('#' + config.prevButton).unbind('click').click(function(e){
-                e.preventDefault();
-                index = index > 0 ? index - 1 : $imageLinks.length - 1;
-                $currentImage = $($imageLinks[index]);
-                createImageContainer();
-            });
+            if(!singleImage) {
 
-            $('#' + config.nextButton).unbind('click').click(function(e){
-                e.preventDefault();
-                index = index < $imageLinks.length-1 ? index + 1 : 0;
-                $currentImage = $($imageLinks[index]);
-                createImageContainer();
+                $('#' + config.prevButton).unbind('click').click(function(e){
+                    e.preventDefault();
+                    index = index > 0 ? index - 1 : $imageLinks.length - 1;
+                    $currentImage = $($imageLinks[index]);
+                    createImageContainer();
+                });
 
-            });
+                $('#' + config.nextButton).unbind('click').click(function(e){
+                    e.preventDefault();
+                    index = index < $imageLinks.length-1 ? index + 1 : 0;
+                    $currentImage = $($imageLinks[index]);
+                    createImageContainer();
+
+                });
+
+            }
 
             $('#' + config.closeButton).on('click', function(){
                 $wrapper.fadeOut('slow');
@@ -82,6 +87,12 @@
             $wrapper   = $('#' + config.wrapper);
             $container = $('#' + config.imageContainer);
             $imageDesc = $('#' + config.imageDescription);
+
+            if($imageLinks.length === 1) {
+                $('#' + config.prevButton).remove();
+                $('#' + config.nextButton).remove();
+                singleImage = true;
+            }
 
         };
 
