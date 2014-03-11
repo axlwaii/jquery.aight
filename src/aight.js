@@ -127,12 +127,14 @@
 
             }
 
-            $('#' + config.closeButton).on('click', function(){
+            $('#' + config.closeButton).on('click', function(e){
+                e.preventDefault();
                 $wrapper.fadeOut('slow');
                 $backdrop.hide();
             });
 
-            $('#' + config.backdrop).unbind('click').click(function(){
+            $('#' + config.backdrop).unbind('click').click(function(e){
+                e.preventDefault();
                 $wrapper.fadeOut('slow');
                 $backdrop.hide();
             });
