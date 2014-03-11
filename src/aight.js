@@ -6,8 +6,8 @@
 
         var init,
             index,
+            setNextImage,
             setNextGroupImage,
-            isGroupImage,
             getGroupList,
             firstSetup,
             $imageLinks,
@@ -17,16 +17,17 @@
             $container,
             $currentImage,
             bindEvents,
-            bindButtons,
+            bindControls,
             createImageContainer,
             that,
             config,
-            standardTemplate,
+            template,
             singleImage = false;
 
         that = this;
 
         config = $.extend({
+
             backdrop: 'aight-backdrop',
             closeButton: 'aight-close',
             carousel: false,
@@ -38,32 +39,52 @@
             prevCharacter: '<',
             prevButton: 'aight-prev',
             wrapper: 'aight-wrapper'
+
         }, options);
 
-        standardTemplate =  '<div id="' + config.backdrop + '"></div>'+
-                            '<div id="' + config.wrapper + '">'+
-                            '<div id="' + config.imageContainer + '">' +
-                            '<a id="' + config.nextButton + '" href="#">'+ config.nextCharacter +'</a>'+
-                            '<a id="' + config.prevButton + '" href="#">' + config.prevCharacter +'</a>'+
-                            '<a id="' + config.closeButton + '" href="#">x</a>'+
-                            '<img src="" alt=""/>' +
-                            '<p id="' + config.imageDescription + '"></p>'+
-                            '</div>' +
-                            '</div>';
+
+        // @desc basic html structure of the lightbox
+        //       id's are generated from the config data
+
+        template =  '<div id="' + config.backdrop + '"></div>'+
+                    '<div id="' + config.wrapper + '">'+
+                    '<div id="' + config.imageContainer + '">' +
+                    '<a id="' + config.nextButton + '" href="#">'+ config.nextCharacter +'</a>'+
+                    '<a id="' + config.prevButton + '" href="#">' + config.prevCharacter +'</a>'+
+                    '<a id="' + config.closeButton + '" href="#">x</a>'+
+                    '<img src="" alt=""/>' +
+                    '<p id="' + config.imageDescription + '"></p>'+
+                    '</div>' +
+                    '</div>';
+
+
+        // @desc finds the closest 'ul' node to the current image
+        //       returns an array of all link elements inside this node
+        //       returns an empty array if the current image is not in the list clostest to it
 
         getGroupList = function() {
-            return $currentImage.closest('ul');
-        };
-
-        isGroupImage = function() {
-
-            var list = getGroupList().find('a');
+            var list = $currentImage.closest('ul').find('a');
 
             if(list.length > 1 && list.index($currentImage) >= 0) {
-                return true;
+                return list;
+            } else {
+                return [];
             }
 
-            return false;
+        };
+
+        // @desc sets the next image
+        // @param dir - 'prev' dicreases the index anything else increases it
+
+        setNextImage = function(dir) {
+
+            if(dir === 'prev') {
+                index = index > 0 ? index - 1 : $imageLinks.length - 1;
+            } else {
+                index = index < $imageLinks.length-1 ? index + 1 : 0;
+            }
+
+            $currentImage = $($imageLinks[index]);
 
         };
 
@@ -76,13 +97,11 @@
 
             if(groupList.length > 0) {
 
-                groupList = groupList.find('a');
                 groupIndex = groupList.index($currentImage);
 
                 if(dir === 'prev') {
                     groupIndex = groupIndex > 0 ? groupIndex - 1 : groupList.length -1;
                 } else {
-
                     groupIndex = groupIndex < groupList.length - 1 ? groupIndex + 1 : 0;
                 }
 
@@ -94,7 +113,8 @@
 
         };
 
-        bindButtons = function() {
+
+        bindControls = function() {
 
             if(!singleImage) {
 
@@ -104,8 +124,7 @@
                     if(config.carouselGroup){
                         setNextGroupImage('prev');
                     } else if (config.carousel) {
-                        index = index < $imageLinks.length-1 ? index + 1 : 0;
-                        $currentImage = $($imageLinks[index]);
+                        setNextImage('prev');
                     }
 
                     createImageContainer();
@@ -117,8 +136,7 @@
                     if(config.carouselGroup){
                         setNextGroupImage('next');
                     } else if (config.carousel) {
-                        index = index < $imageLinks.length-1 ? index + 1 : 0;
-                        $currentImage = $($imageLinks[index]);
+                        setNextImage('next');
                     }
 
                     createImageContainer();
@@ -127,11 +145,15 @@
 
             }
 
+
             $('#' + config.closeButton).on('click', function(e){
+
                 e.preventDefault();
                 $wrapper.fadeOut('slow');
                 $backdrop.hide();
+
             });
+
 
             $('#' + config.backdrop).unbind('click').click(function(e){
                 e.preventDefault();
@@ -143,7 +165,7 @@
 
         firstSetup = function() {
 
-            $('body').append(standardTemplate);
+            $('body').append(template);
 
             $backdrop  = $('#' + config.backdrop);
             $wrapper   = $('#' + config.wrapper);
@@ -170,7 +192,7 @@
 
                 list = getGroupList();
 
-                if(list.length >= 1 && isGroupImage()){
+                if(list.length > 1 ){
                     $('#' + config.prevButton).show();
                     $('#' + config.nextButton).show();
                 } else {
@@ -196,20 +218,11 @@
                 $('#' + config.imageContainer + ' img').prop('src', imgUrl);
                 $('#' + config.imageContainer + ' img').prop('alt', imgDescription);
                 $('#aight-description').text(imgDescription);
-                $wrapper.fadeIn('slow');
-                $backdrop.fadeIn(200);
                 firstRun = true;
             } else {
                 $containerImage.prop('src', imgUrl);
                 $containerImage.prop('alt', imgDescription);
                 $('#aight-description').text(imgDescription);
-                $backdrop.fadeIn(200);
-            }
-
-            if(imgDescription === ''){
-                $imageDesc.hide();
-            } else {
-                $imageDesc.show();
             }
 
             $containerImage = $('#' + config.imageContainer + ' img');
@@ -217,7 +230,7 @@
 
             $containerImage.one('load',function(){
 
-                $wrapper.fadeIn();
+                $wrapper.fadeIn('slow');
 
                 $container.animate({
                     'margin-left':-($containerImage.width()/2),
@@ -227,16 +240,25 @@
             });
 
             if(firstRun){
-                bindButtons();
 
-                if(!isGroupImage()){
+                bindControls();
+
+                if(getGroupList() <= 1){
                     $('#' + config.prevButton).hide();
                     $('#' + config.nextButton).hide();
                 }
 
             }
 
-            $wrapper.fadeIn();
+            if(imgDescription === ''){
+                $imageDesc.hide();
+            } else {
+                $imageDesc.show();
+            }
+
+            $backdrop.fadeIn(200);
+            $wrapper.fadeIn('slow');
+
         };
 
         init = function() {
