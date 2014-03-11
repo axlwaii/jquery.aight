@@ -7,6 +7,7 @@
         var init,
             index,
             setNextGroupImage,
+            isGroupImage,
             getGroupList,
             firstSetup,
             $imageLinks,
@@ -50,9 +51,20 @@
                             '</div>' +
                             '</div>';
 
-
         getGroupList = function() {
             return $currentImage.closest('ul');
+        };
+
+        isGroupImage = function() {
+
+            var list = getGroupList().find('a');
+
+            if(list.length > 1 && list.index($currentImage) >= 0) {
+                return true;
+            }
+
+            return false;
+
         };
 
         setNextGroupImage = function(dir) {
@@ -156,12 +168,12 @@
 
                 list = getGroupList();
 
-                if(list.length < 1 || list.find('a').length <= 1){
-                    $('#' + config.prevButton).hide();
-                    $('#' + config.nextButton).hide();
-                } else {
+                if(list.length >= 1 && isGroupImage()){
                     $('#' + config.prevButton).show();
                     $('#' + config.nextButton).show();
+                } else {
+                    $('#' + config.prevButton).hide();
+                    $('#' + config.nextButton).hide();
                 }
 
                 index = $imageLinks.index($currentImage);
@@ -176,7 +188,6 @@
                 firstRun = false,
                 imgUrl = $currentImage.prop('href'),
                 imgDescription = $currentImage.find('img').prop('alt');
-
 
             if($containerImage.length === 0){
                 firstSetup();
