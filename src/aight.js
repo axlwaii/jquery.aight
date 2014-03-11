@@ -228,6 +228,12 @@
 
             if(firstRun){
                 bindButtons();
+
+                if(!isGroupImage()){
+                    $('#' + config.prevButton).hide();
+                    $('#' + config.nextButton).hide();
+                }
+
             }
 
             $wrapper.fadeIn();
