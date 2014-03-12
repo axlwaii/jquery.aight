@@ -88,6 +88,9 @@
 
         };
 
+        // @desc sets the next image of a group
+        // @param dir - 'prev' dicreases the index anything else increases it
+
         setNextGroupImage = function(dir) {
 
             var groupIndex,
@@ -113,6 +116,8 @@
 
         };
 
+        // @desc sets click events for the lightbox
+        //       get initiated after the first time a link is clicked
 
         bindControls = function() {
 
@@ -163,6 +168,7 @@
 
         };
 
+
         firstSetup = function() {
 
             $('body').append(template);
@@ -179,6 +185,7 @@
             }
 
         };
+
 
         bindEvents = function() {
 
