@@ -1,4 +1,4 @@
-describe('AIGHT - Image Galery plugin', function() {
+describe('AIGHTbox - Image Galery plugin', function() {
 
     'use strict';
 
@@ -23,7 +23,7 @@ describe('AIGHT - Image Galery plugin', function() {
 
     setupPage = function() {
 
-        $('.ai').aight();
+        $('.ai').aightbox();
 
         $firstLink = fixture.find('a')[0];
         $secondLink = fixture.find('a')[1];
@@ -40,7 +40,7 @@ describe('AIGHT - Image Galery plugin', function() {
     describe('basic behaviour', function() {
 
         it('should be defined', function(){
-            expect($.fn.aight).toBeDefined();
+            expect($.fn.aightbox).toBeDefined();
         });
 
     });

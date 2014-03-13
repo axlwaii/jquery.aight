@@ -1,7 +1,7 @@
-jQuery.aight
+jQuery.aightbox
 =========
 
-Aight is a jquery plugin to display images in a lightbox.
+AIGHTbox is a jquery plugin to display images in a lightbox.
 You currently can show:
 
   - single images
@@ -27,7 +27,7 @@ Add some links with pictures to your html
 
 Call the plugin
 ```javascript
-$('a.yourClass').aight();
+$('a.yourClass').aightbox();
 ```
 
 Configuration
@@ -36,7 +36,7 @@ You can easily customize the div id's of the lightbox
 and use your own styling
 
 ```javascript
-$('a.yourClass')({
+$('a.yourClass').aightbox({
     backdrop: 'aight-backdrop',
     closeButton: 'aight-close',
     carousel: false,

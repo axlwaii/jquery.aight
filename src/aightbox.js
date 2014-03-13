@@ -2,7 +2,7 @@
 
     'use strict';
 
-    $.fn.aight = function(options) {
+    $.fn.aightbox = function(options) {
 
         var init,
             index,
