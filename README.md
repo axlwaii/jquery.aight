@@ -11,7 +11,7 @@ You currently can show:
 Version
 ----
 
-0.0.3
+0.1.0
 
 Usage
 ----
