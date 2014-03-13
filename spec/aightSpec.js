@@ -13,9 +13,9 @@ describe('AIGHT - Image Galery plugin', function() {
     loadFixtures = function() {
 
         fixture          = setFixtures(('<body>' +
-                            '<ul id="imageG">' +
-                            '<li><a href="images/1.png"><img src="images/1_thumb.png"/></a></li>' +
-                            '<li><a href="images/2.png"><img src="images/2_thumb.png"/></a></li>' +
+                            '<ul>' +
+                            '<li><a class="ai" href="images/1.png"><img src="images/1_thumb.png"/></a></li>' +
+                            '<li><a class="ai" href="images/2.png"><img src="images/2_thumb.png"/></a></li>' +
                             '</ul>' +
                             '<body>')
                         );
@@ -23,7 +23,7 @@ describe('AIGHT - Image Galery plugin', function() {
 
     setupPage = function() {
 
-        $('#imageG').aight();
+        $('.ai').aight();
 
         $firstLink = fixture.find('a')[0];
         $secondLink = fixture.find('a')[1];
