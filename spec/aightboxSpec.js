@@ -8,7 +8,9 @@ describe('AIGHTbox - Image Galery plugin', function() {
         cleanUp,
         $container,
         $firstLink,
-        $secondLink;
+        $secondLink,
+        $thirdLink,
+        $singleImage;
 
     loadFixtures = function() {
 
@@ -16,7 +18,9 @@ describe('AIGHTbox - Image Galery plugin', function() {
                             '<ul>' +
                             '<li><a class="ai" href="images/1.png"><img src="images/1_thumb.png"/></a></li>' +
                             '<li><a class="ai" href="images/2.png"><img src="images/2_thumb.png"/></a></li>' +
+                            '<li><a class="ai" href="images/3.png"><img src="images/3_thumb.png"/></a></li>' +
                             '</ul>' +
+                            '<a class="ai" href="images/3.png"><img src="images/3_thumb.png"/></a>' +
                             '<body>')
                         );
     };
@@ -25,8 +29,10 @@ describe('AIGHTbox - Image Galery plugin', function() {
 
         $('.ai').aightbox();
 
-        $firstLink = fixture.find('a')[0];
-        $secondLink = fixture.find('a')[1];
+        $firstLink   = fixture.find('a')[0];
+        $secondLink  = fixture.find('a')[1];
+        $thirdLink   = fixture.find('a')[2];
+        $singleImage = fixture.find('a')[3];
 
         $container = fixture.find('#aigth-container');
 
@@ -37,22 +43,20 @@ describe('AIGHTbox - Image Galery plugin', function() {
         $('#aight-wrapper').remove();
     };
 
-    describe('basic behaviour', function() {
 
-        it('should be defined', function(){
-            expect($.fn.aightbox).toBeDefined();
-        });
-
+    it('should be defined', function(){
+        expect($.fn.aightbox).toBeDefined();
     });
 
-    describe('on init', function(){
+
+    describe('image container on init', function(){
 
         beforeEach(function() {
             loadFixtures();
             setupPage();
         });
 
-        it('image container should not be on the page', function(){
+        it('should not be on the page', function(){
             expect($container.length).toBe(0);
         });
 
@@ -70,12 +74,12 @@ describe('AIGHTbox - Image Galery plugin', function() {
             cleanUp();
         });
 
-        it('should show lightbox', function(){
+        it('shows the lightbox', function(){
             $container = $('#aight-container');
             expect($container).toExist();
         });
 
-        it('should contain the image of the clicked anchor',function(){
+        it('contains the image of the clicked anchor',function(){
             var imageLinkUrl = $($firstLink).attr('href');
             var imageUrl = $('#aight-container img').attr('src');
             expect(imageUrl).toContain(imageLinkUrl);
@@ -83,21 +87,90 @@ describe('AIGHTbox - Image Galery plugin', function() {
 
     });
 
-    describe('when close is clicked', function() {
+    describe('controls', function() {
 
         beforeEach(function() {
             loadFixtures();
             setupPage();
+            $($firstLink).trigger('click');
         });
 
         afterEach(function(){
             cleanUp();
         });
 
-        it('should close if x is clicked', function(){
-            $($firstLink).trigger('click');
-            $('#aight-close').click();
-            expect($('#aight-backdrop')).toBeHidden();
+        describe('close is clicked', function() {
+
+            it('closes the lightbox', function(){
+                $('#aight-close').click();
+                expect($('#aight-backdrop')).toBeHidden();
+            });
+
+        });
+
+        describe('next is clicked', function(){
+
+            it('contains the next image', function() {
+                $('#aight-next').trigger('click');
+                var imageLinkUrl = $($secondLink).attr('href');
+                var imageUrl = $('#aight-container img').attr('src');
+                expect(imageUrl).toContain(imageLinkUrl);
+            });
+
+        });
+
+        describe('prev is clicked', function(){
+
+            it('contains the prev image', function() {
+                $('#aight-prev').trigger('click');
+                var imageLinkUrl = $($thirdLink).attr('href');
+                var imageUrl = $('#aight-container img').attr('src');
+                expect(imageUrl).toContain(imageLinkUrl);
+            });
+
+        });
+
+    });
+
+    describe('single image', function() {
+
+        beforeEach(function() {
+            loadFixtures();
+            setupPage();
+            $($singleImage).trigger('click');
+        });
+
+        afterEach(function(){
+            cleanUp();
+        });
+
+        it('next button should be hidden', function() {
+            expect($('#aight-next')).toBeHidden();
+        });
+
+        it('prev button should be hidden', function() {
+            expect($('#aight-prev')).toBeHidden();
+        });
+
+    });
+
+    describe('group image', function() {
+
+        beforeEach(function() {
+            loadFixtures();
+            setupPage();
+            $($thirdLink).trigger('click');
+        });
+
+        afterEach(function(){
+            cleanUp();
+        });
+
+        it('switches to the next picture in the list',function(){
+            $('#aight-next').trigger('click');
+            var imageLinkUrl = $($firstLink).attr('href');
+            var imageUrl = $('#aight-container img').attr('src');
+            expect(imageUrl).toContain(imageLinkUrl);
         });
 
     });
