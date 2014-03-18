@@ -235,17 +235,6 @@
             $containerImage = $('#' + config.imageContainer + ' img');
             $container = $('#' + config.imageContainer);
 
-            $containerImage.one('load',function(){
-
-                $wrapper.fadeIn('slow');
-
-                $container.animate({
-                    'margin-left':-($containerImage.width()/2),
-                    'margin-top': -($containerImage.height()/2)
-                },250);
-
-            });
-
             if(firstRun){
 
                 bindControls();
@@ -263,8 +252,23 @@
                 $imageDesc.show();
             }
 
-            $backdrop.fadeIn(200);
+            $containerImage.hide();
             $wrapper.fadeIn('slow');
+            $container.append('<div class="progress small"><div>Loading…</div></div>');
+
+            $containerImage.one('load',function(){
+
+                $('.progress.small').remove();
+                $containerImage.show();
+
+                $container.animate({
+                    'margin-left':-($containerImage.width()/2),
+                    'margin-top': -($containerImage.height()/2)
+                });
+
+            });
+
+            $backdrop.fadeIn(200);
 
         };
 
