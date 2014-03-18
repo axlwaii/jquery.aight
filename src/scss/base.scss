@@ -100,7 +100,7 @@
   to { transform: rotate(1turn); }
 }
 
-.progress {
+.aight-progress {
   position: relative;
   display: inline-block;
   width: 5em;
@@ -112,18 +112,18 @@
   animation: spin 1s infinite steps(8);
 }
 
-.small.progress {
+.small.aight-progress {
   font-size: 6px;
 }
 
-.large.progress {
+.large.aight-progress {
   font-size: 24px;
 }
 
-.progress:before,
-.progress:after,
-.progress > div:before,
-.progress > div:after {
+.aight-progress:before,
+.aight-progress:after,
+.aight-progress > div:before,
+.aight-progress > div:after {
   content: '';
   position: absolute;
   top: 0;
@@ -136,21 +136,21 @@
   transform-origin: 50% 2.5em; /* container height / 2 */
 }
 
-.progress:before {
+.aight-progress:before {
   background: #555;
 }
 
-.progress:after {
+.aight-progress:after {
   transform: rotate(-45deg);
   background: #777;
 }
 
-.progress > div:before {
+.aight-progress > div:before {
   transform: rotate(-90deg);
   background: #999;
 }
 
-.progress > div:after {
+.aight-progress > div:after {
   transform: rotate(-135deg);
   background: #bbb;
 }

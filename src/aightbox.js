@@ -254,11 +254,11 @@
 
             $containerImage.hide();
             $wrapper.fadeIn('slow');
-            $container.append('<div class="progress small"><div>Loading…</div></div>');
+            $container.append('<div class="aight-progress small"><div>Loading…</div></div>');
 
             $containerImage.one('load',function(){
 
-                $('.progress.small').remove();
+                $('.aight-progress.small').remove();
                 $containerImage.show();
 
                 $container.animate({
