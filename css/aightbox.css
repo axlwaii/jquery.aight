@@ -71,6 +71,21 @@
 #aight-preload {
   display: none; }
 
+@-o-keyframes spin {
+  to {
+    transform: rotate(1turn);
+    -o-transform: rotate(1turn); } }
+
+@-moz-keyframes spin {
+  to {
+    transform: rotate(1turn);
+    -moz-transform: rotate(1turn); } }
+
+@-webkit-keyframes spin {
+  to {
+    transform: rotate(1turn);
+    -webkit-transform: rotate(1turn); } }
+
 @keyframes spin {
   to {
     transform: rotate(1turn); } }
@@ -84,7 +99,10 @@
   font-size: 12px;
   text-indent: 999em;
   overflow: hidden;
-  animation: spin 1s infinite steps(8); }
+  animation: spin 1s infinite steps(8);
+  -webkit-animation: spin 1s infinite steps(8);
+  -moz-animation: spin 1s infinite steps(8);
+  -o-animation: spin 1s infinite steps(8); }
 
 .small.aight-progress {
   font-size: 6px; }
@@ -108,6 +126,12 @@
   box-shadow: 0 3.5em #eee;
   /* container height - part height */
   transform-origin: 50% 2.5em;
+  /* container height / 2 */
+  -moz-transform-origin: 50% 2.5em;
+  /* container height / 2 */
+  -webkit-transform-origin: 50% 2.5em;
+  /* container height / 2 */
+  -o-transform-origin: 50% 2.5em;
   /* container height / 2 */ }
 
 .aight-progress:before {
@@ -115,12 +139,22 @@
 
 .aight-progress:after {
   transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
   background: #777; }
 
 .aight-progress > div:before {
   transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
   background: #999; }
 
 .aight-progress > div:after {
   transform: rotate(-135deg);
+  -o-transform: rotate(-135deg);
+  -moz-transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
   background: #bbb; }
