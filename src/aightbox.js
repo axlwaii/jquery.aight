@@ -246,11 +246,7 @@
 
             }
 
-            if(imgDescription === ''){
-                $imageDesc.hide();
-            } else {
-                $imageDesc.show();
-            }
+            $imageDesc.hide();
 
             $containerImage.hide();
             $wrapper.fadeIn('slow');
@@ -260,6 +256,10 @@
 
                 $('.aight-progress.small').remove();
                 $containerImage.show();
+
+                if(imgDescription !== ''){
+                    $imageDesc.show();
+                }
 
                 $container.animate({
                     'margin-left':-($containerImage.width()/2),
