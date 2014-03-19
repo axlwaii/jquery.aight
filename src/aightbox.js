@@ -16,6 +16,7 @@
             $wrapper,
             $container,
             $currentImage,
+            $spinner,
             bindEvents,
             bindControls,
             createImageContainer,
@@ -38,6 +39,7 @@
             nextCharacter: '>',
             prevCharacter: '<',
             prevButton: 'aight-prev',
+            spinnerClass: 'aight-progress small',
             wrapper: 'aight-wrapper'
 
         }, options);
@@ -54,6 +56,7 @@
                     '<a id="' + config.closeButton + '" href="#">x</a>'+
                     '<img src="" alt=""/>' +
                     '<p id="' + config.imageDescription + '"></p>'+
+                    '<div class="' + config.spinnerClass +'" style="display: none;"><div>Loading…</div></div>' +
                     '</div>' +
                     '</div>';
 
@@ -177,6 +180,7 @@
             $wrapper   = $('#' + config.wrapper);
             $container = $('#' + config.imageContainer);
             $imageDesc = $('#' + config.imageDescription);
+            $spinner   = $('#' + config.imageContainer + ' .' + config.spinnerClass.split(' ')[0] );
 
             if($imageLinks.length === 1) {
                 $('#' + config.prevButton).hide();
@@ -250,11 +254,11 @@
 
             $containerImage.hide();
             $wrapper.fadeIn('slow');
-            $container.append('<div class="aight-progress small"><div>Loading…</div></div>');
+            $spinner.show();
 
             $containerImage.one('load',function(){
 
-                $('.aight-progress.small').remove();
+                $spinner.hide();
                 $containerImage.show();
 
                 if(imgDescription !== ''){
