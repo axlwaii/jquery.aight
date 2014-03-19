@@ -44,10 +44,18 @@ $('a.yourClass').aightbox({
     imageContainer: 'aight-container',
     imageDescription: 'aight-description',
     nextButton: 'aight-next',
+    prevButton: 'aight-prev',
+    spinnerClass: 'aight-progress small',
+    wrapper: 'aight-wrapper'
+});
+```
+
+Change the default characters for the control buttons
+```javascript
+$('a.yourClass').aightbox({
+    closeCharacter: 'x',
     nextCharacter: '>',
     prevCharacter: '<',
-    prevButton: 'aight-prev',
-    wrapper: 'aight-wrapper'
 });
 ```
 
