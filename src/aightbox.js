@@ -33,6 +33,7 @@
             closeButton: 'aight-close',
             carousel: false,
             carouselGroup: true,
+            closeCharacter: 'x',
             imageContainer: 'aight-container',
             imageDescription: 'aight-description',
             nextButton: 'aight-next',
@@ -51,9 +52,15 @@
         template =  '<div id="' + config.backdrop + '"></div>'+
                     '<div id="' + config.wrapper + '">'+
                     '<div id="' + config.imageContainer + '">' +
-                    '<a id="' + config.nextButton + '" href="#">'+ config.nextCharacter +'</a>'+
-                    '<a id="' + config.prevButton + '" href="#">' + config.prevCharacter +'</a>'+
-                    '<a id="' + config.closeButton + '" href="#">x</a>'+
+                    '<div id="' + config.nextButton + '" >' +
+                    '<a href="#">'+ config.nextCharacter +'</a>'+
+                    '</div>' +
+                    '<div id="' + config.prevButton + '">' +
+                    '<a href="#">' + config.prevCharacter +'</a>'+
+                    '</div>' +
+                    '<div id="' + config.closeButton + '">' +
+                    '<a href="#">' + config.closeCharacter + '</a>'+
+                    '</div>' +
                     '<img src="" alt=""/>' +
                     '<p id="' + config.imageDescription + '"></p>'+
                     '<div class="' + config.spinnerClass +'" style="display: none;"><div>Loading…</div></div>' +

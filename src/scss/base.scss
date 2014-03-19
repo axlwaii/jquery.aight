@@ -47,43 +47,55 @@
 }
 
 // Next Previous Button
-#aight-next, #aight-prev, #aight-close {
-  position: absolute;
-  font-family: 'Helvetica';
-  font-weight: bold;
-  color: #ddd;
-  text-decoration: none;
-  &:hover {
-    color: #fff;
+#aight-next , #aight-prev, #aight-close {
+  a {
+    position: absolute;
+    font-family: 'Helvetica';
+    font-weight: bold;
+    color: #ddd;
+    text-decoration: none;
+    &:hover {
+      color: #fff;
+    }
   }
 }
 
 #aight-next, #aight-prev {
-  font-size: 35px;
-  margin-top: -25px;
+  a {
+    font-size: 35px;
+    margin-top: -25px;
+  }
 }
 
 #aight-close {
-  font-size: 25px;
+  a {
+    font-size: 25px;
+  }
 }
 
 #aight-next {
-  top: 50%;
-  right: 0;
-  margin-right: -35px;
+  a {
+    top: 50%;
+    right: 0;
+    margin-right: -35px;
+  }
 }
 
 #aight-prev {
-  top: 50%;
-  left: 0;
-  margin-left: -35px;
+  a {
+    top: 50%;
+    left: 0;
+    margin-left: -35px;
+  }
 }
 
 #aight-close {
-  top: 0;
-  right: 0;
-  margin-right: -25px;
-  margin-top: -25px;
+  a {
+    top: 0;
+    right: 0;
+    margin-right: -25px;
+    margin-top: -25px;
+  }
 }
 
 #aight-preload {
@@ -91,10 +103,6 @@
 }
 
 // Spinner from http://lea.verou.me/2013/11/cleanest-css-spinner-ever/
-#aight-spinner {
-
-}
-
 
 @-o-keyframes spin {
   to {
