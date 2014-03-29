@@ -29,6 +29,7 @@
 
         config = $.extend({
 
+            animate: false,
             backdrop: 'aight-backdrop',
             closeButton: 'aight-close',
             carousel: false,
@@ -272,10 +273,17 @@
                     $imageDesc.show();
                 }
 
-                $container.animate({
-                    'margin-left':-($containerImage.width()/2),
-                    'margin-top': -($containerImage.height()/2)
-                });
+                if(config.animate === true) {
+                    $container.animate({
+                        'margin-left':-($containerImage.width()/2),
+                        'margin-top': -($containerImage.height()/2)
+                    });
+                } else {
+                    $container.css({
+                        'margin-left':-($containerImage.width()/2),
+                        'margin-top': -($containerImage.height()/2)
+                    });
+                }
 
             });
 
