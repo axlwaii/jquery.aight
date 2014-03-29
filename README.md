@@ -2,20 +2,16 @@ jQuery.aightbox
 =========
 
 AIGHTbox is a jquery plugin to display images in a lightbox.
-You currently can show:
-
-  - single images
-  - group images
-  - all images on the page 
 
 Version
 ----
 
-0.1.2
+0.1.3
 
 Usage
 ----
-Add some links with pictures to your html
+
+Grouped Images - with previous and next image button
 ```html
 <ul>
     <li><a class="yourClass" href="big-1.jpg"><img src="thumb-1.jpg"></a></li>
@@ -23,6 +19,11 @@ Add some links with pictures to your html
     <li><a class="yourClass" href="big-3.jpg"><img src="thumb-3.jpg"></a></li>
     <li><a class="yourClass" href="big-4.jpg"><img src="thumb-4.jpg"></a></li>
 </ul>
+```
+
+Single Image - without previous and next image button
+```html
+<a class="yourClass" href="big-1.jpg"><img src="thumb-1.jpg"></a></li>
 ```
 
 Call the plugin
@@ -39,8 +40,6 @@ and use your own styling
 $('a.yourClass').aightbox({
     backdrop: 'aight-backdrop',
     closeButton: 'aight-close',
-    carousel: false,
-    carouselGroup: true,
     imageContainer: 'aight-container',
     imageDescription: 'aight-description',
     nextButton: 'aight-next',
@@ -58,6 +57,20 @@ $('a.yourClass').aightbox({
     prevCharacter: '<',
 });
 ```
+
+PreLoadImage
+Setting the option true, appends the images found in the links to the page in an hidden container.
+```
+NOTICE: This might be useful when dealing with a small amount of images but obviously
+        increases the time your page needs to load.
+```
+
+```javascript
+$('a.yourClass').aightbox({
+    preloadImages: true
+});
+```
+
 
 License
 ----
