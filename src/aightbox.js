@@ -1,3 +1,7 @@
+/* jquery.aightbox
+*  version: 0.1.3
+*/
+
 (function($, window, document, undefined) {
 
     'use strict';
@@ -20,6 +24,7 @@
             bindEvents,
             bindControls,
             createImageContainer,
+            preloadImages,
             that,
             config,
             template,
@@ -37,10 +42,12 @@
             closeCharacter: 'x',
             imageContainer: 'aight-container',
             imageDescription: 'aight-description',
+            imageWrapper: 'aight-image-wrapper',
             nextButton: 'aight-next',
             nextCharacter: '>',
             prevCharacter: '<',
             prevButton: 'aight-prev',
+            preloadImages: false,
             spinnerClass: 'aight-progress small',
             wrapper: 'aight-wrapper'
 
@@ -62,7 +69,9 @@
                     '<div id="' + config.closeButton + '">' +
                     '<a href="#">' + config.closeCharacter + '</a>'+
                     '</div>' +
+                    '<div id="' + config.imageWrapper + '">'+
                     '<img src="" alt=""/>' +
+                    '</div>' +
                     '<p id="' + config.imageDescription + '"></p>'+
                     '<div class="' + config.spinnerClass +'" style="display: none;"><div>Loading…</div></div>' +
                     '</div>' +
@@ -291,8 +300,33 @@
 
         };
 
+        // Appends the images found in $imageLinks to the page in an hidden container
+        //
+        // NOTICE: This might be useful when dealing with a small amount of images but obviously
+        //         increases the time your page needs to load.
+
+        preloadImages = function(){
+            var hiddenContainer = '<div id="aight-preload" style="display: none;"></div>',
+                newImages       = [];
+
+            $('body').append(hiddenContainer);
+
+            $imageLinks.each(function(){
+                var newImage = new Image();
+                newImage.src = this.href;
+                newImages.push(newImage);
+            });
+
+            $('#aight-preload').append(newImages);
+        };
+
         init = function() {
             $imageLinks = $(that.selector);
+
+            if(config.preloadImages === true){
+                preloadImages();
+            }
+
             bindEvents();
         };
 

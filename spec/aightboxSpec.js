@@ -175,4 +175,23 @@ describe('AIGHTbox - Image Galery plugin', function() {
 
     });
 
+    describe('with preLoaded Images', function(){
+        beforeEach(function() {
+            $('.ai').aightbox({preloadImages: true});
+        });
+
+        afterEach(function() {
+            $('#aight-preload').remove();
+        });
+
+        it('contains the preload container', function(){
+            expect($('#aight-preload').length).toBe(1);
+        });
+
+        it('loads all images', function(){
+            expect($('#aight-preload img').length).toBe($('.ai img').length);
+        });
+
+    });
+
 });
