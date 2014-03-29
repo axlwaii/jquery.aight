@@ -95,7 +95,7 @@
   display: inline-block;
   width: 5em;
   height: 5em;
-  margin: 0 .5em;
+  margin: 0 0.5em;
   font-size: 12px;
   text-indent: 999em;
   overflow: hidden;
@@ -110,18 +110,15 @@
 .large.aight-progress {
   font-size: 24px; }
 
-.aight-progress:before,
-.aight-progress:after,
-.aight-progress > div:before,
-.aight-progress > div:after {
+.aight-progress:before, .aight-progress:after, .aight-progress > div:before, .aight-progress > div:after {
   content: '';
   position: absolute;
   top: 0;
   left: 2.25em;
   /* (container width - part width)/2  */
-  width: .5em;
+  width: 0.5em;
   height: 1.5em;
-  border-radius: .2em;
+  border-radius: 0.2em;
   background: #eee;
   box-shadow: 0 3.5em #eee;
   /* container height - part height */

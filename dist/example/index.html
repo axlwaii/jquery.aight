@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="../css/aightbox.css" />
+    <!-- jquery 1.10  -->
+    <script src="../jquery.min.js"></script>
+    <script src="../aightbox.min.js"></script>
+    <style>
+      .group {
+        display: block;
+        width: 600px;
+        margin: 20px auto;
+        height: 120px;
+      }
+
+      h2 {
+        text-align: center;
+      }
+
+      ul {
+        list-style: none;
+        width: 400px;
+        margin: 0 auto;
+      }
+
+      ul.single {
+        list-style: none;
+        width: 150px;
+        margin: 0 auto;
+      }
+
+      li {
+        margin-left: 10px;
+        float: left;
+      };
+    </style>
+  </head>
+  <body>
+
+  <div class="group">
+    <h2>Group images</h2>
+    <ul>
+      <li><a class="ai" href="http://lorempixel.com/640/480/nature/1"><img src="http://lorempixel.com/75/50/nature/1"/></a></li>
+      <li><a class="ai" href="http://lorempixel.com/640/480/nature/2"><img src="http://lorempixel.com/75/50/nature/2"/></a></li>
+      <li><a class="ai" href="http://lorempixel.com/640/480/nature/3"><img src="http://lorempixel.com/75/50/nature/3"/></a></li>
+      <li><a class="ai" href="http://lorempixel.com/640/480/nature/4"><img src="http://lorempixel.com/75/50/nature/4"/></a></li>
+    </ul>
+  </div>
+
+  <div class="group">
+    <h2>Big Group images</h2>
+    <ul>
+      <li><a class="ai" href="http://lorempixel.com/1024/768/nature/6"><img src="http://lorempixel.com/75/50/nature/6"/></a></li>
+      <li><a class="ai" href="http://lorempixel.com/1024/768/nature/7"><img src="http://lorempixel.com/75/50/nature/7"/></a></li>
+      <li><a class="ai" href="http://lorempixel.com/1024/768/nature/8"><img src="http://lorempixel.com/75/50/nature/8"/></a></li>
+      <li><a class="ai" href="http://lorempixel.com/1024/768/nature/9"><img src="http://lorempixel.com/75/50/nature/9"/></a></li>
+    </ul>
+  </div>
+
+  <div class="group">
+    <h2>Single image</h2>
+    <ul class="single">
+      <li><a class="ai" href="http://lorempixel.com/640/480/nature/5"><img src="http://lorempixel.com/75/50/nature/5"/></a></li>
+    </ul>
+  </div>
+
+    <script>
+      $(document).ready(function(){
+          $('.ai').aightbox();
+      });
+    </script>
+  </body>
+</html>
