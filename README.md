@@ -49,7 +49,7 @@ $('a.yourClass').aightbox({
 });
 ```
 
-Change the default characters for the control buttons
+####Change the default characters for the control buttons:
 ```javascript
 $('a.yourClass').aightbox({
     closeCharacter: 'x',
@@ -58,8 +58,8 @@ $('a.yourClass').aightbox({
 });
 ```
 
-PreLoadImage
-Setting the option true, appends the images found in the links to the page in an hidden container.
+####Preload Images:
+Setting `preloadImages` to `true`, will append the images, found in the links, to the page in an hidden container.
 ```
 NOTICE: This might be useful when dealing with a small amount of images but obviously
         increases the time your page needs to load.
